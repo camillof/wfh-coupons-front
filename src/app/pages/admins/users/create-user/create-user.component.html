@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Invite user</h1>
+<div mat-dialog-content>
+
+  <section class="mat-typography">
+    <form class="example-form" [formGroup]="userForm" (ngSubmit)="saveUser()" style="overflow: hidden">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Name" formControlName="name" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Email" formControlName="email" type="email" required>
+        <mat-error *ngIf="userForm.controls['email'].invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="isAdmin">isAdmin</mat-checkbox>
+
+
+    </form>
+  </section>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-button color="primary"  cdkFocusInitial [disabled]="!userForm.valid" (click)="saveUser()">Send invitation</button>
+</div>

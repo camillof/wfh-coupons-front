@@ -1,0 +1,33 @@
+
+
+<div class="example-container">
+  <mat-toolbar color="primary">
+    <button mat-icon-button (click)="snav.toggle()" *ngIf="currentUser.isAdmin">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span style="white-space: normal; font-size: initial">Work From Home app (BETA) - {{currentUser.name}}</span>
+    <!-- This fills the remaining space of the current row -->
+    <span class="example-fill-remaining-space"></span>
+    
+    <span>
+      <a (click)="logout()" style="font-size: medium; text-decoration: underline; cursor: pointer;">Salir</a>
+    </span>
+  </mat-toolbar>
+ 
+  <mat-sidenav-container class="example-sidenav-container" >
+    <!-- [style.marginTop.px]="mobileQuery.matches ? 56 : 0" -->
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56">
+      <mat-nav-list>
+        <h3 matSubheader>Admin</h3>
+        <a mat-list-item *ngFor="let item of adminMenuItems" routerLink="{{item.route}}">{{item.name}}</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item *ngFor="let item of userMenuItems" routerLink="{{item.route}}">{{item.name}}</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

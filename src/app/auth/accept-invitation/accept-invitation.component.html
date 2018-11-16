@@ -1,0 +1,51 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Set password</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="acceptInvitation()" #acceptInvitationForm="ngForm">
+      <table cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <input #password="ngModel" matInput placeholder="Password" [(ngModel)]="user.password" name="password" type="password" required autofocus>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-form-field>
+              <input #rePass="ngModel" matInput placeholder="Confirm password" [(ngModel)]="user.password_confirmation" type="password" name="password"
+                required>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </form>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="acceptInvitation()" color="primary" 
+    [disabled]="submitted || user.password != user.password_confirmation || !acceptInvitationForm.form.valid">
+      Confirm account
+    </button>
+    <mat-spinner [style.display]="submitted ? 'inline-block' : 'none'" [diameter]="30" style="margin-left: 1rem; vertical-align: middle;"></mat-spinner>
+  </mat-card-actions>
+</mat-card>
+<mat-card  *ngIf="rePass.touched && user.password != user.password_confirmation" style="color: red">
+  <div>
+    <p>Passwords dont match</p>
+  </div>
+</mat-card>
+<mat-card *ngIf="messages && messages.length > 0 && !submitted" style="color: green">
+  <div>
+    <strong>Confirmation success</strong>
+  </div>
+  <div *ngFor="let message of messages">{{ message }}</div>
+</mat-card>
+<mat-card *ngIf="errors && errors.length > 0 && !submitted" style="color: red">
+  <div>
+    <strong>Error</strong>
+  </div>
+  <div *ngFor="let error of errors">{{ error }}</div>
+</mat-card>

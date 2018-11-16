@@ -1,0 +1,77 @@
+<mat-toolbar color="primary">
+  <span>Manage Coupons</span>
+</mat-toolbar>
+
+<div class="filters">
+  <mat-form-field style="margin-right: 2rem">
+    <mat-select (selectionChange)="filtersActive.by_user_id = $event.value; refreshCoupons()" placeholder="Select user">
+      <mat-option [value]="null">-</mat-option>
+      <mat-option *ngFor="let user of usersSource" [value]="user.id">
+        {{user.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-chip-list [multiple]="true" style="display: inline-block;" >
+    <mat-chip [selected]="filter_only_pending" (click)="filter_only_pending = !filter_only_pending; refreshCoupons()" >Pending</mat-chip>
+    <mat-chip [selected]="filter_only_current_month" (click)="filter_only_current_month = !filter_only_current_month; refreshCoupons()" >This month</mat-chip>
+  </mat-chip-list>
+</div>
+
+
+
+<div style="overflow: auto">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%; min-width: 600px;">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Date WFH Column -->
+    <ng-container matColumnDef="user_name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> User </th>
+      <td mat-cell *matCellDef="let element"> {{element.user.name }} </td>
+    </ng-container>
+
+    <!-- Date WFH Column -->
+    <ng-container matColumnDef="created_at">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Date created </th>
+      <td mat-cell *matCellDef="let element"> {{element.created_at | date: 'fullDate' }} </td>
+    </ng-container>
+
+    <!-- Date WFH Column -->
+    <ng-container matColumnDef="requested_date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> WFH date </th>
+      <td mat-cell *matCellDef="let element"> {{element.requested_date | date: 'fullDate' }} </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.status | uppercase}} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element" style="white-space: nowrap;">
+        <mat-icon (click)="approveCoupon(element)" style="cursor: pointer; margin-right: 1rem">done</mat-icon>
+        <mat-icon (click)="rejectCoupon(element)" style="cursor: pointer; margin-right: 1rem">close</mat-icon>
+        <mat-icon (click)="deleteCoupon(element)" style="cursor: pointer">delete</mat-icon>
+      </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    <!-- tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr> -->
+  </table>
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; padding: 0; border-radius: 0">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card>
+  <mat-card *ngIf="dataSource.data.length <= 0" style="display: flex; justify-content: center; align-items: center; border-radius: 0; padding-right: 0; padding-left: 0; min-width: 600px">
+    <p>No data with this filters.</p>
+  </mat-card>
+
+</div>
