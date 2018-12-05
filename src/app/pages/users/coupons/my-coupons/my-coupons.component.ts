@@ -108,7 +108,7 @@ export class MyCouponsComponent implements OnInit {
       console.log('The dialog was closed');
       if (result == true) {
         const coupon = new Coupon();
-        coupon.user_id = 1;
+        coupon.user_id = this.authService.User.id;
         coupon.requested_date = event.value;
         this.couponsService.saveCoupon(coupon).subscribe(result => {
           this.snackBar.open("Coupon created succefully", "Accept", { duration: 3000 });
