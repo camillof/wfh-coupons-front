@@ -48,6 +48,7 @@ export class ManageCouponsComponent implements OnInit {
     // const filters = new CouponFilteringParams({ by_month: this.selectedMonth.getMonth() + 1 })
     this.filtersActive.by_status = this.filter_only_pending ? Coupon.STATUSES.pending : null;
     this.filtersActive.by_month = this.filter_only_current_month ? new Date().getMonth() + 1 : null;
+    this.filtersActive.by_year = this.filter_only_current_month ? new Date().getFullYear() : null;
 
     this.isLoading = true;
     this.couponsService.getAllCoupons(this.filtersActive).subscribe(res => {

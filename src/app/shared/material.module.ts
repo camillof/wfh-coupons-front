@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EmptyCalendarHeaderComponent } from './components/empty-calendar-header/empty-calendar-header.component';
 
 
 
@@ -51,6 +52,10 @@ const MODALS = [
   ConfirmDialog,
 ]
 
+const COMPONENTS = [
+  EmptyCalendarHeaderComponent
+]
+
 @NgModule({
   imports: [
     ...SHARED_MODULES
@@ -59,10 +64,13 @@ const MODALS = [
     ...SHARED_MODULES
   ],
   declarations: [
-    ...MODALS
+    ...MODALS,
+    ...COMPONENTS
+    
   ],
   entryComponents: [
-    ...MODALS
+    ...MODALS,
+    ...COMPONENTS
   ]
 })
 export class MaterialModule { }

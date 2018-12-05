@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
+import { EmptyCalendarHeaderComponent } from 'src/app/shared/components/empty-calendar-header/empty-calendar-header.component';
 
 
 
@@ -48,6 +49,7 @@ export class MyCouponsComponent implements OnInit {
 
   isLoading: boolean = true;
   
+  emptyCalendarHeader = EmptyCalendarHeaderComponent;
 
   @ViewChild(MatTable) table: MatTable<any>;
   @ViewChild(MatSort) sort: MatSort;
@@ -65,7 +67,12 @@ export class MyCouponsComponent implements OnInit {
   }
 
   refreshCoupons() {
-    const filters = new CouponFilteringParams({by_month: this.selectedMonth.getMonth() + 1, by_user_id: this.authService.User.id})
+    const filters = new CouponFilteringParams(
+      {
+        by_month: this.selectedMonth.getMonth() + 1,
+        by_user_id: this.authService.User.id,
+        by_year: this.selectedMonth.getFullYear()
+      })
     this.isLoading = true;
     this.couponsService.getAllCoupons(filters).subscribe(res => {
       this.dataSource = new MatTableDataSource(res);
@@ -141,11 +148,12 @@ export class MyCouponsComponent implements OnInit {
   }
 
   get isNextMonth() {
-    return this.selectedMonth.getMonth() > this.currentDate.getMonth();
+    return this.selectedMonth.getMonth() > this.currentDate.getMonth() || this.selectedMonth.getFullYear() > this.currentDate.getFullYear();
   }
 
   get isPastMonth() {
-    return this.selectedMonth.getMonth() < this.currentDate.getMonth();
+    return (this.selectedMonth.getMonth() < this.currentDate.getMonth() && this.selectedMonth.getFullYear() <= this.currentDate.getFullYear()) ||
+    this.selectedMonth.getFullYear() < this.currentDate.getFullYear();
   }
   
   chosenMonthHandler(date: Date, datepicker: MatDatepicker<any>) { 

@@ -10,7 +10,10 @@
   <span class="example-header-label" (click)="monthPicker.open()">{{periodLabel}}</span>
   <input matInput [matDatepicker]="monthPicker" [max]="dateAdapter.addCalendarMonths(currentDate, 1)" hidden>
   <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-  <mat-datepicker #monthPicker [startAt]="selectedMonth" startView="year" (monthSelected)="chosenMonthHandler($event, monthPicker)" touchUi="true"></mat-datepicker>
+  <mat-datepicker #monthPicker 
+  [startAt]="selectedMonth" startView="year" 
+  (monthSelected)="chosenMonthHandler($event, monthPicker)" 
+  touchUi="true"></mat-datepicker>
   <button mat-icon-button (click)="moveMonth('next')" [disabled]="isNextMonth">
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
@@ -22,7 +25,7 @@
 <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" 
 [matDatepickerFilter]="dateFilter" placeholder="Fecha WFH" (dateChange)="dateSelected($event)" hidden>
 <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
-<mat-datepicker #picker [startAt]="selectedMonth" touchUi="true" ></mat-datepicker>
+<mat-datepicker #picker [startAt]="selectedMonth" touchUi="true" [calendarHeaderComponent]="emptyCalendarHeader"></mat-datepicker>
 
 <div >
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%">
@@ -74,5 +77,5 @@
   <p>Your have {{countDaysLeft}} days left this month</p>
 </mat-card>
 
-<button mat-raised-button [disabled]="isPastMonth || countDaysLeft <=0" color="primary" (click)="picker.open()" style="margin-bottom: 1rem; margin-top: 1rem">Request
-  WFH</button>
+<button mat-raised-button [disabled]="isPastMonth || countDaysLeft <=0" color="primary" 
+(click)="picker.open()" style="margin-bottom: 1rem; margin-top: 1rem" >Request WFH</button>

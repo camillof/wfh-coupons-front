@@ -27,9 +27,10 @@ export class Coupon {
 }
 
 export class CouponFilteringParams {
-    by_month: Number;
+    by_month: number;
     by_status: Status;
     by_user_id: number;
+    by_year: number;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);

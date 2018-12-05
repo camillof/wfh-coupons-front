@@ -22,3 +22,13 @@
 .example-double-arrow .mat-icon {
     margin: -22%;
 }
+
+/deep/ .mat-datepicker-content {
+    overflow: initial !important;
+}
+
+@media (orientation: landscape) {
+    /deep/ .mat-datepicker-content-touch .mat-calendar {
+        height: 60vh !important;
+    }
+}
