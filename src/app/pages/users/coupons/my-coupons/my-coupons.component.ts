@@ -12,6 +12,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
 import { EmptyCalendarHeaderComponent } from 'src/app/shared/components/empty-calendar-header/empty-calendar-header.component';
+import { ResolveStart } from '@angular/router';
 
 
 
@@ -66,13 +67,23 @@ export class MyCouponsComponent implements OnInit {
     
   }
 
-  refreshCoupons() {
-    const filters = new CouponFilteringParams(
-      {
-        by_month: this.selectedMonth.getMonth() + 1,
-        by_user_id: this.authService.User.id,
-        by_year: this.selectedMonth.getFullYear()
-      })
+  refreshCoupons() {  
+    var filters = null;
+    if (this.authService.User.isAdmin){
+      filters = new CouponFilteringParams(
+        {
+          by_month: this.selectedMonth.getMonth() + 1,          
+          by_year: this.selectedMonth.getFullYear()
+        })
+    } else {
+      filters = new CouponFilteringParams(
+        {
+          by_month: this.selectedMonth.getMonth() + 1,
+          by_user_id: this.authService.User.id,
+          by_year: this.selectedMonth.getFullYear()
+        })
+    }
+    
     this.isLoading = true;
     this.couponsService.getAllCoupons(filters).subscribe(res => {
       this.dataSource = new MatTableDataSource(res);

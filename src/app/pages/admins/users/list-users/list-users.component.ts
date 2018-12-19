@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./list-users.component.scss']
 })
 export class ListUsersComponent implements OnInit {
-  displayedColumns: string[] = ['created_at', 'name', 'email', 'role', 'active'];
+  displayedColumns: string[] = ['created_at', 'name', 'email', 'role', 'active','ccoupons'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource([])
   isLoading: boolean = true;
   @ViewChild(MatTable) table: MatTable<any>;
@@ -30,6 +30,7 @@ export class ListUsersComponent implements OnInit {
     // const filters = new CouponFilteringParams({ by_month: this.selectedMonth.getMonth() + 1 })
     this.isLoading = true;
     this.usersService.getAll().subscribe(res => {
+      debugger;
       this.dataSource = new MatTableDataSource(res);
       this.dataSource.sort = this.sort;
     }, error => { }, () => {

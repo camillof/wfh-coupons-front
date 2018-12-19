@@ -16,12 +16,13 @@ export class User {
     role: Roles;
     active: boolean;
     email: string;
+    ccoupons: number;
 
     constructor(values: Object = {}) { 
         Object.assign(this, values);
     }
     
-    get isAdmin() {
+    get isAdmin():boolean {
         return this.role === Roles.admin;
     }
 
