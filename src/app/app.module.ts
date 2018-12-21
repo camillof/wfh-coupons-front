@@ -10,6 +10,8 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NbAuthModule, NbAuthSimpleInterceptor } from '@nebular/auth';
 import { AUTH_STRATEGY } from './auth/auth-strategy.class';
+import { ErrorHandler } from './shared/interceptor/error_handler';
+import { RequestInterceptor } from './shared/interceptor/http_interceptor';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AUTH_STRATEGY } from './auth/auth-strategy.class';
     // The locale would typically be provided on the root module of your application. We do it at
     // the component level here, due to limitations of our example generation script.
     { provide: MAT_DATE_LOCALE, useValue: 'en-EN' },
-    { provide: HTTP_INTERCEPTORS, useClass: NbAuthSimpleInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: NbAuthSimpleInterceptor, multi: true },
+    ErrorHandler,
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
     
   ],
   bootstrap: [AppComponent]
