@@ -22,6 +22,10 @@ const routes: Routes = [{
                     path: 'manage-coupons',
                     loadChildren: './admins/manage-coupons/manage-coupons.module#ManageCouponsModule',
                 },
+                {
+                    path: 'redirect-google',
+                    loadChildren: './admins/redirect-google/redirect-google.module#RedirectGoogleModule',
+                },
                 { path: '', redirectTo: 'users', pathMatch: 'full' },
             ]
         },

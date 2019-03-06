@@ -27,6 +27,10 @@
 <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle> -->
 <mat-datepicker #picker [startAt]="selectedMonth" touchUi="true" [calendarHeaderComponent]="emptyCalendarHeader"></mat-datepicker>
 
+
+<input matInput [matRangeDatepicker]="resultPicker" (dateChange)="dateRangeSelected($event)" hidden>
+<mat-range-datepicker #resultPicker [startAt]="selectedMonth" touchUi="true" [rangeMode]="true"></mat-range-datepicker>
+ 
 <div >
   <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%">
     

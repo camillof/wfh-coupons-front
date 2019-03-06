@@ -2,6 +2,7 @@ import { environment } from '../../../../environments/environment';
 import { User } from '../../admins/users/user';
 
 export const COUPONS_BASIC_URL = environment.apiDir + 'coupons/';
+export const COUPONS_API_URL = environment.apiDir;
 
 enum Status {
     pending = 'pending',

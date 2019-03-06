@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatRangeDatepickerModule, MatRangeNativeDateModule} from 'mat-range-datepicker'
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,6 +35,8 @@ const SHARED_MODULES = [
   MatSelectModule,
   MatFormFieldModule,
   MatDatepickerModule,
+  MatRangeDatepickerModule,
+  MatRangeNativeDateModule,
   MatNativeDateModule,
   MatSnackBarModule,
   MatIconModule,

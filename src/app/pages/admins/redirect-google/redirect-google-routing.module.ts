@@ -1,13 +1,14 @@
+
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { ManageCouponsComponent } from './manage-coupons/manage-coupons.component';
+import { RedirectGoogleComponent } from './redirect-google/redirect-google.component';
 
 
 
 const routes: Routes = [
     {
         path: '',
-        component: ManageCouponsComponent,        
+        component: RedirectGoogleComponent,        
     }   
 ];
 
@@ -15,5 +16,5 @@ const routes: Routes = [
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class ManageCouponsRoutingModule {
+export class RedirectGoogleRoutingModule {
 }

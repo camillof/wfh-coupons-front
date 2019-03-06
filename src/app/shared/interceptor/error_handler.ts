@@ -14,6 +14,7 @@ export class ErrorHandler {
     ) { }
 
     public handleError(err: HttpErrorResponse) {
+        debugger;
         if (err.status === 401) {
             this.nbAuthService.clear();
             this.snackbar.open("Session invalid, please log in again", "Accept", { duration: 3000 });

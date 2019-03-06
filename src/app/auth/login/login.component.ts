@@ -16,6 +16,7 @@ export class LoginComponent extends NbLoginComponent {
 
   ngOnInit() {
     this.service.getToken().subscribe(res => {
+      debugger
       res.getPayload
     })
   }

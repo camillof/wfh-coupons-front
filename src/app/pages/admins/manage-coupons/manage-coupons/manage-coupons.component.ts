@@ -10,6 +10,7 @@ import { User } from '../../users/user';
 import { UsersService } from '../../users/users.service';
 import { MatChipSelectionChange } from '@angular/material/chips';
 
+
 @Component({
   selector: 'app-manage-coupons',
   templateUrl: './manage-coupons.component.html',
@@ -76,12 +77,32 @@ export class ManageCouponsComponent implements OnInit {
   }
 
   approveCoupon(coupon: Coupon) {
-    this.couponsService.approveCoupon(coupon.id).subscribe(res => {
-      this.refreshCoupons();
-      this.snackBar.open("Coupon approved succefully", "Accept", { duration: 3000 });
+     
+      this.couponsService.approveCoupon(coupon.id).subscribe(res => {
+        this.refreshCoupons();
+        this.snackBar.open("Coupon approved succefully", "Accept", { duration: 3000 });
       
+
+    
+
     });
   }
+
+  calendarLogin(){
+    this.couponsService.redirectCoupon().subscribe((data: any) => {    window.location.href = data.data.toString()},
+    error => () => {
+        debugger;
+        console.log("error");
+    },
+     () => {
+        debugger;
+        console.log("complete");
+    });
+  }
+
+
+  
+
 
   rejectCoupon(coupon: Coupon) {
     this.couponsService.rejectCoupon(coupon.id).subscribe(res => {

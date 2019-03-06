@@ -7,6 +7,7 @@ enum Roles {
 
 export const USERS_BASIC_URL = environment.apiDir + 'users/';
 export const INVITATION_BASE_URL = environment.apiDir + 'invitations/';
+export const BASE_URL = environment.apiDir;
 
 export class User {
     static ROLES = Roles;

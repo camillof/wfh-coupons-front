@@ -6,12 +6,12 @@ import { ManageCouponsComponent } from './manage-coupons/manage-coupons.componen
 
 @NgModule({
   declarations: [
-    ManageCouponsComponent
+    ManageCouponsComponent    
   ],
   imports: [
     CommonModule,
     MaterialModule,
-    ManageCouponsRoutingModule
+    ManageCouponsRoutingModule  
   ]
 })
 export class ManageCouponsModule { }
